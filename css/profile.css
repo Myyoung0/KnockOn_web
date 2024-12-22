@@ -1,0 +1,52 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2a2a2a;
+    color: #b1fcb1;
+    border-radius: 8px;
+}
+
+h1 {
+    color: #00ff41;
+    text-align: center;
+}
+
+.statistics, .my-posts {
+    margin-top: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    color: #00ff41;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #00ff41;
+    color: #1e1e1e;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #33ff66;
+}

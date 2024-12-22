@@ -1,0 +1,35 @@
+데이터베이스 관리 및 구축
+
+knockon_web DB 생성
+
+테이블 설계
+
+- Users 테이블(사용자 관리)
+- Posts 테이블(게시글 관리)
+게시글에 좋아요, 댓글 기능있음
+- Categories 테이블(카테고리 관리)
+상위 카테고리, 하위 카테고리가 있음
+1. 공지게시판
+2. Hacking Forum
+Web, Pwnable, Network, Reversing, Forensic, More
+3. Grow With Us
+Hacking Story, 개인 Project 공유, Hacking Tip, 팀원 모집
+4. Community
+자유게시판, 이슈게시판, 잡답, 질문
+- Comments 테이블(댓글 관리)
+- Likes 테이블(좋아요 관리)
+- User_Statistics 테이블(사용자 활동 통계)
+- Sessions  테이블(세션 관리)
+쿠키/세션 기반 사용자 인증 관리 정보 관리
+
+페이지 구상도
+
+index 페이지
+
+가운데 상단에 로고
+왼쪽 상단에 더보기 아이콘
+오른쪽 상단에 로그인 회원가입 검색창
+왼쪽 더보기 누르면 사이드바로 네비게이션 바 나옴
+사이드바에 있는 더보기 다시 누르면 들어감
+
+그 이외의 부분은 페이지를 오른쪽 왼쪽 밑 4공간으로 나눔(공지, 팀원모집, 이슈게시판, 질문)으로 나눠서 각각 최신순으로 보여줌.

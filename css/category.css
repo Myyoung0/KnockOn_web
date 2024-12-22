@@ -1,0 +1,48 @@
+body {
+    background-color: #1e1e1e;
+    color: #b1fcb1;
+    font-family: Consolas, monospace;
+    margin: 0;
+    padding: 20px;
+}
+
+.category-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #00ff41;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-list li {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    transition: background-color 0.3s;
+}
+
+.post-list li:hover {
+    background-color: #333;
+}
+
+.post-list a {
+    color: #00ff41;
+    text-decoration: none;
+}
+
+.post-list a:hover {
+    text-decoration: underline;
+}
