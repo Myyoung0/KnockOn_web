@@ -1,0 +1,172 @@
+/* style.css */
+
+/* 전역 리셋 & 기본 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1e1e1e;    /* 전체 배경 - 다크 그레이 */
+  color: #b1fcb1;               /* 기본 텍스트 컬러 - 연두 빛 */
+  font-family: Consolas, monospace; /* 해커/터미널 느낌 폰트 */
+}
+
+/* a 태그 스타일 */
+a {
+  color: #00ff41;               /* 네온 그린 */
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* 헤더 */
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #111;        /* 더 어두운 톤의 헤더 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #333;
+}
+
+.header-left, .header-center, .header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* 햄버거 아이콘 */
+.header-left img.hamburger-icon {
+  width: 28px; 
+  height: 28px;
+  cursor: pointer; 
+  margin-right: 16px;
+}
+
+/* 로고/타이틀 (header-center) */
+.header-center h1 {
+  font-size: 1.5rem;
+  color: #00ff41;      /* 네온 그린 */
+  letter-spacing: 1px;
+}
+
+/* 헤더 오른쪽 버튼들 */
+.header-right button {
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #b1fcb1;
+  padding: 6px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.header-right button:hover {
+  background-color: #2a2a2a;
+}
+.header-right .search-box {
+  margin-left: 10px;
+  padding: 5px;
+  background-color: #2a2a2a;
+  border: 1px solid #333;
+  color: #00ff41;
+}
+
+/* 사이드바 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: #111;
+  border-right: 1px solid #333;
+  transform: translateX(-100%);  /* 처음에는 숨김 상태 */
+  transition: transform 0.3s ease;
+  padding: 20px;
+  z-index: 999;                  /* 다른 요소 위에 표시 */
+}
+
+.sidebar.show {
+  transform: translateX(0);      /* show 클래스가 있을 때는 화면에 표시 */
+}
+
+/* 사이드바 내 닫기 버튼 */
+.sidebar .close-btn {
+  cursor: pointer;
+  color: #00ff41;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* 사이드바 메뉴 */
+.sidebar ul {
+  list-style: none;
+}
+.sidebar ul li {
+  margin: 12px 0;
+  cursor: pointer;
+}
+.sidebar ul li:hover {
+  color: #00ff41;
+}
+
+/* 서브메뉴(하위 ul) 안쪽 들여쓰기 */
+.sidebar ul li ul {
+  margin-left: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  list-style-type: circle;   /* ● 표시 */
+}
+
+/* 메인 (4구역) - 그리드 */
+.main {
+  margin-top: 60px; /* 헤더 높이만큼 띄움 */
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2열 */
+  grid-template-rows: 1fr 1fr;    /* 2행 => 총 4칸 */
+  gap: 20px;                      /* 섹션 간격 */
+}
+
+/* 각 섹션 박스 */
+.section-box {
+  background-color: #2a2a2a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 16px;
+  transition: background-color 0.2s;
+}
+.section-box:hover {
+  background-color: #333; /* 살짝 강조 */
+}
+.section-box h2 {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  color: #00ff41;         /* 섹션 타이틀은 네온 그린 */
+}
+
+/* 게시글 목록 */
+.post-list {
+  list-style: none;
+}
+.post-list li {
+  margin: 6px 0;
+  transition: color 0.2s;
+}
+.post-list li:hover {
+  color: #00ff41;
+}
+
+/* 푸터 */
+.footer {
+  text-align: center;
+  padding: 10px;
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 20px;
+  border-top: 1px solid #333;
+}
