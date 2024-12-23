@@ -175,7 +175,7 @@ while ($row = $result->fetch_assoc()) {
         </div>
 
         <button type="submit" class="btn submit">수정</button>
-        <button type="button" class="btn cancel" onclick="location.href='post_view.php?id=<?= $post_id ?>'">취소</button>
+        <button type="button" class="btn cancel" onclick="location.href='profile.php?id=<?= $post_id ?>'">취소</button>
     </form>
 </div>
 </body>
