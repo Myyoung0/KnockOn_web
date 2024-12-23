@@ -61,6 +61,10 @@ $stmt->close();
 </head>
 <body>
 <div class="container">
+    <!-- 상단 바 -->
+    <div class="header">
+        <button class="home-button" onclick="location.href='index.php'">홈</button>
+    </div>
     <h1>내 프로필</h1>
 
     <!-- 프로필 정보 -->

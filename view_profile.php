@@ -37,6 +37,12 @@ if (!$profile) {
 </head>
 <body>
 <div class="container">
+    <!-- 상단 바 -->
+    <div class="header">
+        <button class="home-button" onclick="location.href='index.php'">홈</button>
+    </div>
+
+    <!-- 사용자 프로필 -->
     <h1><?= htmlspecialchars($profile['username']) ?>님의 프로필</h1>
     <ul>
         <li>대학교: <?= htmlspecialchars($profile['university'] ?? '정보 없음') ?></li>

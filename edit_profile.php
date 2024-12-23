@@ -82,6 +82,7 @@ $stmt->close();
         <textarea name="bio" id="bio" rows="5"><?= htmlspecialchars($profile['bio'] ?? '') ?></textarea>
         
         <button type="submit">저장하기</button>
+        <button type="button" onclick="location.href='profile.php'">취소</button>
     </form>
 </div>
 </body>
