@@ -1,82 +1,97 @@
 :root {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --accent-color: #00ff00;
-    --secondary-color: #1a1a1a;
-    --button-color: #00ff00;
-  }
-  
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .login-container {
-    background-color: var(--secondary-color);
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-    width: 300px;
-  }
-  
-  h1 {
-    color: var(--accent-color);
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    color: var(--accent-color);
-  }
-  
-  input {
-    padding: 8px;
-    margin-bottom: 15px;
-    background-color: var(--bg-color);
-    border: 1px solid var(--accent-color);
-    color: var(--text-color);
-    border-radius: 3px;
-  }
-  
-  button {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
-    border: none;
-    padding: 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #00cc00;
-  }
-  
-  .error-message {
-    color: #ff4444;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  p {
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  a {
-    color: var(--accent-color);
-    text-decoration: no
-  }  
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #00ff00;
+  --secondary-color: #1a1a1a;
+  --button-color: #00ff00;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: var(--secondary-color);
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  width: 300px;
+}
+
+h1 {
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  color: var(--accent-color);
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 8px;
+  margin-bottom: 15px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 3px;
+  color: var(--text-color);
+  -webkit-text-fill-color: var(--text-color);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-color) inset !important;
+  -webkit-text-fill-color: var(--text-color) !important;
+}
+
+button {
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.error-message {
+  color: #ff4444;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
