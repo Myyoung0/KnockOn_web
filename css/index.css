@@ -1,250 +1,182 @@
-/* 전역 리셋 & 기본 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #00ff00;
+  --secondary-color: #1a1a1a;
+  --button-color: #00ff00;
 }
 
 body {
-  background-color: #1e1e1e;    /* 전체 배경 - 다크 그레이 */
-  color: #b1fcb1;               /* 기본 텍스트 컬러 - 연두 빛 */
-  font-family: Consolas, monospace; /* 해커/터미널 느낌 폰트 */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* a 태그 스타일 */
-a {
-  color: #00ff41;               /* 네온 그린 */
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-/* 헤더 */
 .header {
-  width: 100%;
-  height: 60px;
-  background-color: #111;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  border-bottom: 1px solid #333;
-  position: relative;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  box-shadow: 0 2px 10px rgba(0, 255, 0, 0.1);
 }
-
-.header-left, .header-right {
+.welcome-message {
+  margin-right: 15px;
+  font-size: 14px;
+}
+.header-left, .header-center, .header-right {
   display: flex;
   align-items: center;
 }
 
-/* 중앙 로고 배치 */
+.logo {
+  height: 40px;
+  filter: drop-shadow(0 0 5px var(--accent-color));
+}
+
 .header-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-right: 700px;
 }
 
-.header-center img.logo {
-  width: 120px; /* 기본 로고 크기 */
-  height: auto; /* 비율 유지 */
-  object-fit: contain; /* 비율 왜곡 방지 */
-}
 
-/* 더보기 아이콘 */
-.header-left .more-icon {
-  width: 48px; /* 아이콘 너비 */
-  height: 24px; /* 아이콘 높이 */
+.more-icon {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
-  fill: #00ff41; /* 네온 그린 */
-  transition: fill 0.2s;
-  margin-left: -8px; /* 왼쪽으로 붙이기 */
+  fill: var(--accent-color);
 }
 
-.header-left .more-icon:hover {
-  fill: #33ff66; /* 호버 시 밝은 네온 */
-}
-
-/* 헤더 오른쪽 버튼들 */
-.header-right button {
+button {
   background-color: transparent;
-  border: 1px solid #333;
-  color: #b1fcb1;
-  padding: 6px 10px;
-  margin-left: 10px;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 6px 12px;
+  margin: 0 5px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 
-.header-right button:hover {
-  background-color: #2a2a2a;
+button:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
 }
 
-.header-right .search-box {
-  margin-left: 10px;
-  padding: 5px;
-  background-color: #2a2a2a;
-  border: 1px solid #333;
-  color: #00ff41;
-}
-/* 로그인 사용자 메시지 */
-.welcome-message {
-  margin-right: 10px;
-  color: #00ff41;
-  font-weight: bold;
+button:active {
+  transform: scale(0.98);
+  opacity: 0.8;
 }
 
-/* 사이드바 */
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  margin-right: 5px;
+}
+
 .sidebar {
   position: fixed;
+  left: -250px;
   top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background-color: #111;
-  border-right: 1px solid #333;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  padding: 20px;
-  z-index: 999;
+  width: 250px;
+  height: 100%;
+  background-color: var(--secondary-color);
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
 }
 
 .sidebar.show {
-  transform: translateX(0);
+  left: 0;
 }
 
-.sidebar .close-btn {
+.close-btn {
+  text-align: right;
+  padding: 10px;
   cursor: pointer;
-  color: #00ff41;
-  margin-bottom: 20px;
-  font-weight: bold;
+  color: var(--accent-color);
 }
 
 .sidebar ul {
-  list-style: none;
+  list-style-type: none;
+  padding: 0;
 }
 
 .sidebar ul li {
-  margin: 12px 0;
-  cursor: pointer;
+  padding: 10px 20px;
 }
 
-.sidebar ul li:hover {
-  color: #00ff41;
+.sidebar ul li a {
+  color: var(--text-color);
+  text-decoration: none;
 }
 
-.sidebar ul li ul {
-  margin-left: 15px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  list-style-type: circle;
+.sidebar ul li a:hover {
+  color: var(--accent-color);
 }
 
-/* 메인 (4구역) - 그리드 */
 .main {
-  margin-top: 60px;
+  margin-left: 20px;
   padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 20px;
 }
 
 .section-box {
-  background-color: #2a2a2a;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 16px;
-  transition: background-color 0.2s;
-}
-
-.section-box:hover {
-  background-color: #333;
-}
-
-.section-box h2 {
-  margin-bottom: 12px;
-  font-size: 1.2rem;
-  color: #00ff41;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
 }
 
 .post-list {
-  list-style: none;
+  list-style-type: none;
+  padding: 0;
 }
 
 .post-list li {
-  margin: 6px 0;
-  transition: color 0.2s;
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+  transition: all 0.3s ease;
 }
 
 .post-list li:hover {
-  color: #00ff41;
+  background-color: rgba(0, 255, 0, 0.1);
 }
 
-.footer {
-  text-align: center;
-  padding: 10px;
-  color: #666;
-  font-size: 0.8rem;
-  margin-top: 20px;
-  border-top: 1px solid #333;
+.post-list li a {
+  color: var(--text-color);
+  text-decoration: none;
 }
 
-/* 반응형 디자인 */
-
-/* 화면이 768px 이하일 때 */
-@media (max-width: 768px) {
-  .header {
-    flex-wrap: wrap;
-    height: auto;
-  }
-
-  .header-center {
-    position: static;
-    transform: none;
-    margin: 8px 0;
-  }
-
-  .header-right {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .header-right button, .header-right .search-box {
-    font-size: 12px;
-    margin-left: 4px;
-    padding: 4px 8px;
-  }
-
-  .header-center img.logo {
-    width: 100px; /* 작은 화면에서 로고 크기 감소 */
-  }
-
-  .main {
-    grid-template-columns: 1fr; /* 한 열로 변경 */
-    grid-template-rows: auto;
-  }
+.post-list li a:hover {
+  color: var(--accent-color);
 }
 
-/* 화면이 480px 이하일 때 */
-@media (max-width: 480px) {
-  .header {
-    justify-content: center;
-  }
-
-  .header-left, .header-right {
-    display: none; /* 좌우 숨김 */
-  }
-
-  .header-center img.logo {
-    width: 80px; /* 초소형 화면에서 로고 크기 감소 */
-  }
-
-  .main {
-    padding: 10px;
-  }
-
-  .section-box {
-    padding: 12px;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+.post-list li {
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.post-list li:nth-child(1) { animation-delay: 0.1s; }
+.post-list li:nth-child(2) { animation-delay: 0.2s; }
+.post-list li:nth-child(3) { animation-delay: 0.3s; }
+.post-list li:nth-child(4) { animation-delay: 0.4s; }
+.post-list li:nth-child(5) { animation-delay: 0.5s; }

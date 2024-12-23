@@ -13,42 +13,47 @@ $username = $is_logged_in ? $_SESSION['username'] : null;
  * 게시물 검색 또는 카테고리별 게시물 가져오기
  */
 $searchResults = [];
+$categoryPosts = [];
 $selectedCategory = null;
 
 // 검색어 또는 카테고리 클릭 확인
-if (!empty($_GET['search']) || !empty($_GET['category'])) {
-    if (!empty($_GET['category'])) {
-        // 카테고리별 게시물 가져오기
-        $selectedCategory = trim($_GET['category']);
-        $sql = "
-            SELECT p.post_id, p.title, p.created_at, c.name AS category_name
-            FROM Posts p
-            JOIN Categories c ON p.category_id = c.category_id
-            WHERE c.name = ?
-            ORDER BY p.created_at DESC
-        ";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $selectedCategory);
-    } elseif (!empty($_GET['search'])) {
-        // 검색어 기반 게시물 검색
-        $searchQuery = trim($_GET['search']);
-        $sql = "
-            SELECT p.post_id, p.title, p.created_at, c.name AS category_name
-            FROM Posts p
-            JOIN Categories c ON p.category_id = c.category_id
-            WHERE p.title LIKE ? OR p.content LIKE ?
-            ORDER BY c.name, p.created_at DESC
-        ";
-        $stmt = $conn->prepare($sql);
-        $likeSearch = '%' . $searchQuery . '%';
-        $stmt->bind_param('ss', $likeSearch, $likeSearch);
-    }
-
+if (!empty($_GET['search'])) {
+    // 검색어 기반 게시물 검색
+    $searchQuery = trim($_GET['search']);
+    $sql = "
+        SELECT p.post_id, p.title, p.created_at, c.name AS category_name
+        FROM Posts p
+        JOIN Categories c ON p.category_id = c.category_id
+        WHERE p.title LIKE ? OR p.content LIKE ?
+        ORDER BY c.name, p.created_at DESC
+    ";
+    $stmt = $conn->prepare($sql);
+    $likeSearch = '%' . $searchQuery . '%';
+    $stmt->bind_param('ss', $likeSearch, $likeSearch);
     $stmt->execute();
     $result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
         $searchResults[$row['category_name']][] = $row;
+    }
+    $stmt->close();
+} elseif (!empty($_GET['category'])) {
+    // 카테고리별 게시물 가져오기
+    $selectedCategory = trim($_GET['category']);
+    $sql = "
+        SELECT p.post_id, p.title, p.created_at
+        FROM Posts p
+        JOIN Categories c ON p.category_id = c.category_id
+        WHERE c.name = ?
+        ORDER BY p.created_at DESC
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $selectedCategory);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $categoryPosts[] = $row;
     }
     $stmt->close();
 }
@@ -97,7 +102,7 @@ if (empty($_GET['search']) && empty($_GET['category'])) {
 <!-- 헤더 -->
 <div class="header">
     <div class="header-left">
-        <!-- 햄버거 아이콘 -->
+        <!-- 더보기 아이콘 -->
         <svg class="more-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" onclick="toggleSidebar()">
             <circle cx="5" cy="12" r="2"></circle>
             <circle cx="12" cy="12" r="2"></circle>
@@ -111,7 +116,7 @@ if (empty($_GET['search']) && empty($_GET['category'])) {
 
     <div class="header-right">
         <?php if ($is_logged_in): ?>
-            <span class="welcome-message"><?= htmlspecialchars($username) ?>님, 환영합니다!</span>
+            <span class="welcome-message">WhiteHat <?= htmlspecialchars($username) ?></span>
             <button onclick="location.href='profile.php'">프로필</button>
             <button onclick="location.href='logout.php'">로그아웃</button>
             <button onclick="location.href='write_post.php'" class="write-button">작성</button>
@@ -182,24 +187,21 @@ if (empty($_GET['search']) && empty($_GET['category'])) {
                 </ul>
             </div>
         <?php endforeach; ?>
+    <?php elseif (!empty($categoryPosts)): ?>
+        <h2><?= htmlspecialchars($selectedCategory) ?> 게시판</h2>
+        <ul class="post-list">
+            <?php foreach ($categoryPosts as $post): ?>
+                <li>
+                    <a href="post_view.php?id=<?= $post['post_id'] ?>">
+                        <?= htmlspecialchars($post['title']) ?>
+                    </a>
+                    (<?= substr($post['created_at'], 0, 10) ?>)
+                </li>
+            <?php endforeach; ?>
+        </ul>
     <?php elseif (!empty($_GET['search'])): ?>
         <h2>검색 결과</h2>
         <p>검색어 "<strong><?= htmlspecialchars($_GET['search']) ?></strong>"에 대한 결과가 없습니다.</p>
-    <?php elseif (!empty($categoryPosts)): ?>
-        <h2><?= htmlspecialchars($selectedCategory) ?> 게시판</h2>
-        <div class="section-box">
-            <ul class="post-list">
-                <?php foreach ($categoryPosts as $post): ?>
-                    <li>
-                        <a href="post_view.php?id=<?= $post['post_id'] ?>">
-                            <?= htmlspecialchars($post['title']) ?>
-                        </a>
-                        <p><?= htmlspecialchars(substr($post['content'], 0, 100)) ?>...</p>
-                        (<?= substr($post['created_at'], 0, 10) ?>)
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
     <?php elseif ($selectedCategory): ?>
         <h2><?= htmlspecialchars($selectedCategory) ?> 게시판</h2>
         <p>현재 게시판에 게시글이 없습니다.</p>
@@ -284,8 +286,16 @@ if (empty($_GET['search']) && empty($_GET['category'])) {
 
 <script>
 function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('show');
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('show');
+  
+  // 사이드바가 열릴 때 배경 흐림 효과 추가
+  const main = document.querySelector('.main');
+  if (sidebar.classList.contains('show')) {
+    main.style.filter = 'blur(5px)';
+  } else {
+    main.style.filter = 'none';
+  }
 }
 </script>
 </body>
