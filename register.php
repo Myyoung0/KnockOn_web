@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 필수 입력값 검증
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-        $error = '모든 필드를 입력해야 합니다.';
+        $error = '모든 필드를 입력하세요.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = '유효한 이메일 주소를 입력하세요.';
     } elseif ($password !== $confirm_password) {
