@@ -1,5 +1,4 @@
 <?php
-// DB 연결
 require_once __DIR__ . '/config/database.php';
 
 // 세션 시작
@@ -115,11 +114,11 @@ $stmt->close();
     <!-- 게시글 내용 -->
     <h1><?= htmlspecialchars($post['title']) ?></h1>
     <p>
-        작성자: 
-        <a href="view_profile.php?id=<?= $post['user_id'] ?>">
-            <?= htmlspecialchars($post['username']) ?>
-        </a> | 작성일: <?= htmlspecialchars($post['created_at']) ?>
-    </p>
+    작성자: 
+    <a href="view_profile.php?id=<?= $post['user_id'] ?>" class="author-link">
+        <?= htmlspecialchars($post['username']) ?>
+    </a> | 작성일: <?= htmlspecialchars($post['created_at']) ?>
+</p>
     <div class="content"><?= nl2br(htmlspecialchars($post['content'])) ?></div>
 
     <!-- 첨부 파일 -->
