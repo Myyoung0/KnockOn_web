@@ -1,8 +1,6 @@
 <?php
-// DB 연결
 require_once __DIR__ . '/config/database.php';
 
-// 세션 시작
 session_start();
 
 // 로그인 여부 확인

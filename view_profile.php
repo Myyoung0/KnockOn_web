@@ -1,5 +1,4 @@
 <?php
-// DB 연결
 require_once __DIR__ . '/config/database.php';
 
 // 사용자 ID 가져오기
